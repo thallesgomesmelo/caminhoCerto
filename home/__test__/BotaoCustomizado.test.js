@@ -2,7 +2,6 @@ import React from 'react'
 import {Text, TouchableOpacity} from 'react-native'
 import BotaoCustomizado from '../BotaoCustomizado'
 import renderer from 'react-test-renderer'
-import { exportAllDeclaration } from '@babel/types'
 
 describe('<BotaoCustomizado/>', () => {
     describe('Sucesso', () => {
@@ -35,6 +34,27 @@ describe('<BotaoCustomizado/>', () => {
             //     { width: '100%' }
             // ])
             expect(compomenteTouchableOpacaity.props.style[1]).toMatchObject({ backgroundColor: '#aaaaaa' })
+        })
+
+        test('Valida se teve alteração na foto do compomente', () => {
+            const tree = renderer.create(
+                <BotaoCustomizado
+                    titulo='sos'
+                    cor='#fff'
+                    acao={() => console.log()}
+                />
+            )
+            expect(tree).toMatchSnapshot()
+        })
+
+        test('Valida se o compomente vai utilizar a cor padrão caso nenhuma for informada', () => {
+            const tree = renderer.create(
+                <BotaoCustomizado
+                    titulo='sos'
+                    acao={() => console.log()}
+                />
+            )
+            expect(tree).toMatchSnapshot()
         })
     })
 })
